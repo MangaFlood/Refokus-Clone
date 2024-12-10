@@ -43,14 +43,15 @@ function Marquees() {
     ]
 
   return (
-    <div className='py-20 mt-20'>
-      {marqueeData.map((item, index) => (
-        <Marquee 
-            key={index}
-            imgUrl={item}
-        />
-      ))}
-    </div>
+      <div className='w-full overflow-hidden'>
+          {marqueeData.map((item, index) => (
+            <Marquee 
+                key={index}
+                imgUrl={item}
+                id={index}
+            />
+          ))}
+      </div>
   )
 }
 

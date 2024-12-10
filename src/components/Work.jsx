@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
+import gsap from 'gsap';
 
 
 function Work() {
 
-    const imageData = [
+    const rawImageData = [
         {
             url: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/77b5b783911401.5d4b03c198716.png",
             left: "53%",
             top: "45%",
-            isActive: true
+            isActive: false
         },
         {
             url: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/bc71c7127720099.61481691386ac.jpg",
@@ -42,12 +43,94 @@ function Work() {
         }
     ]
 
+    const [imageData, setImageData] = useState(rawImageData);
+
+    const handleImagesIn = (e) => {
+        let mouseLocation = (Math.floor(e.clientY/714*100))
+
+        if (mouseLocation >= 0 && mouseLocation <= 15){
+            const updatedImageData = imageData.map((item, index) => {
+                if (index === 0) {
+                    return {...item, isActive: true}
+                }
+                else {
+                    return {...item, isActive: false}
+                }
+            })
+            setImageData(updatedImageData)
+        }
+        else if (mouseLocation >= 15 && mouseLocation <= 30){
+            const updatedImageData = imageData.map((item, index) => {
+                if (index === 1) {
+                    return {...item, isActive: true}
+                }
+                else {
+                    return {...item, isActive: false}
+                }
+            })
+            setImageData(updatedImageData)
+        }
+        else if (mouseLocation >= 30 && mouseLocation <= 45){
+            const updatedImageData = imageData.map((item, index) => {
+                if (index === 2) {
+                    return {...item, isActive: true}
+                }
+                else {
+                    return {...item, isActive: false}
+                }
+            })
+            setImageData(updatedImageData)
+        }
+        else if (mouseLocation >= 45 && mouseLocation <= 60){
+            const updatedImageData = imageData.map((item, index) => {
+                if (index === 3) {
+                    return {...item, isActive: true}
+                }
+                else {
+                    return {...item, isActive: false}
+                }
+            })
+            setImageData(updatedImageData)
+        }
+        else if (mouseLocation >= 60 && mouseLocation <= 75){
+            const updatedImageData = imageData.map((item, index) => {
+                if (index === 4) {
+                    return {...item, isActive: true}
+                }
+                else {
+                    return {...item, isActive: false}
+                }
+            })
+            setImageData(updatedImageData)
+        }
+        else if (mouseLocation >= 75 && mouseLocation <= 90){
+            const updatedImageData = imageData.map((item, index) => {
+                if (index === 5) {
+                    return {...item, isActive: true}
+                }
+                else {
+                    return {...item, isActive: false}
+                }
+            })
+            setImageData(updatedImageData)
+        }
+    }
+
+    const handleImagesOut = () => {
+        const updatedImageData = imageData.map((item) => {
+            return { ...item, isActive: false }; // Deactivate all items
+        });
+        setImageData(updatedImageData); // Update the state
+    };
+    
+    
+
 
   return (
     <div className='w-full mt-10'>
         <div className='max-w-screen-xl mt-20 mx-auto text-[30vw] relative'>
             <h1 className='text-[27vw] tracking-tight text-zinc-100 font-medium leading-none text-center lowercase'>Work</h1>
-            <div className='w-full h-[55vh]  absolute top-0'>
+            <div onMouseMove={(e) => handleImagesIn(e)} onMouseLeave={handleImagesOut} className='w-full h-[55vh] absolute top-0'>
                 {imageData.map((item, index) => 
                     item.isActive && (
                         <img key={index} style={{left: item.left, top: item.top,}} className='w-72 rounded-lg absolute -translate-x-[50%] -translate-y-[50%]' src={item.url} alt="" />
